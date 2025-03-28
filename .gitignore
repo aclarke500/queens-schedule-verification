@@ -1,0 +1,51 @@
+# === Node.js / Vue (frontend/) ===
+node_modules/
+dist/
+frontend/.env
+frontend/.env.*  # support for .env.development etc.
+
+# Vite cache
+frontend/.vitepress/cache/
+frontend/.cache/
+frontend/.output/
+
+# Log files
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# === Python / Flask (backend/) ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+backend/venv/
+backend/.env
+instance/
+*.db
+*.sqlite3
+
+# Flask / Werkzeug log files
+backend/*.log
+
+# === OS/System Files ===
+.DS_Store
+Thumbs.db
+
+# === IDEs ===
+.vscode/
+.idea/
+*.swp
+
+
+echo "# queens-schedule-verification" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M master
+git remote add origin https://github.com/aclarke500/queens-schedule-verification.git
+git push -u origin master

@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-900 text-white;
+}
+
+.upload-box {
+  @apply border-4 border-dashed rounded-xl p-6 cursor-pointer transition-all duration-300 shadow-lg;
+}
+
+.upload-box:hover {
+  @apply border-queens-yellow bg-gray-800 transform scale-105;
+}
+
+.btn {
+  @apply px-6 py-2 rounded-xl font-bold transition-all duration-300 shadow-lg;
+}
+
+.btn-primary {
+  @apply bg-queens-red hover:bg-red-700 text-white;
+}
+
+.btn:disabled {
+  @apply opacity-50 cursor-not-allowed transform-none;
+}
