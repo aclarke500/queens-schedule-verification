@@ -1,8 +1,3 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-from ocr import extract_text_from_image
-from agent import get_courses_from_ocr
-from analyze_courses import check_cs_courses
 import os
 
 import base64
@@ -14,6 +9,13 @@ if encoded_creds:
     with open(creds_path, "wb") as f:
         f.write(base64.b64decode(encoded_creds))
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = creds_path
+
+
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from ocr import extract_text_from_image
+from agent import get_courses_from_ocr
+from analyze_courses import check_cs_courses
 
 
 app = Flask(__name__)
