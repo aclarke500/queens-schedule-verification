@@ -38,33 +38,52 @@ export const store = reactive({
   async analyzeSchedules() {
     this.loading = true;
     
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // Create FormData object to send files
+      const formData = new FormData();
+      
+      if (this.fallSchedule) {
+        formData.append('file1', this.fallSchedule);
+      }
+      
+      if (this.winterSchedule) {
+        formData.append('file2', this.winterSchedule);
+      }
+      
+      // Use the correct endpoint from the backend
+      const isProd: boolean = import.meta.env.VITE_DEV == 'false';
     
-    this.analysisResult = {
-      courses: [
-        {
-          course_code: 'STAT 362',
-          day: 'Friday',
-          time_start: '11:30AM',
-          time_end: '12:30PM',
-          location: 'Biosciences Complex 1102'
-        },
-        {
-          course_code: 'CISC 324',
-          day: 'Monday',
-          time_start: '2:30PM',
-          time_end: '4:00PM',
-          location: 'Jeffery Hall 155'
-        }
-      ],
-      cs_requirements: [
-        'Missing required course CISC 235',
-        'Consider taking CISC 352 as a technical elective'
-      ]
-    };
     
-    this.loading = false;
+    let endpoint;
+      if (isProd){
+        endpoint = import.meta.env.VITE_PROD_URL;
+      } else {
+        endpoint = import.meta.env.VITE_DEV_URL
+      }
+      endpoint+='/api/upload';
+      alert(endpoint)
+    
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+        // Don't set Content-Type header - browser will set it with boundary for FormData
+      });
+      
+      if (!response.ok) {
+        console.error('API Error:', response.status, response.statusText);
+        throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      this.analysisResult = data;
+      
+    } catch (error) {
+      console.error('Error analyzing schedules:', error);
+      throw error;
+    } finally {
+      this.loading = false;
+    }
+    
     return this.analysisResult;
   },
   

@@ -30,6 +30,13 @@ const router = createRouter({
 router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
   document.title = `${to.meta.title as string} | Queen's Schedule Analyzer` || 'Queen\'s Schedule Analyzer'
   next()
+  const egg = {
+    name:'egg',
+  }
+  if(egg.name=='shoe'){
+    const x = from;
+    console.log(x)
+  }
 })
 
 export default router 
