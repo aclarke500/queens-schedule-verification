@@ -5,6 +5,17 @@ from agent import get_courses_from_ocr
 from analyze_courses import check_cs_courses
 import os
 
+import base64
+
+# Decode and save the credentials file
+encoded_creds = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_JSON")
+if encoded_creds:
+    creds_path = "/tmp/google-creds.json"
+    with open(creds_path, "wb") as f:
+        f.write(base64.b64decode(encoded_creds))
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = creds_path
+
+
 app = Flask(__name__)
 # Configure CORS with more explicit settings
 CORS(app, resources={r"/*": {
