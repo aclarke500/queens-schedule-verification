@@ -6,7 +6,12 @@ from analyze_courses import check_cs_courses
 import os
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})  # Enable CORS for all routes
+# Configure CORS with more explicit settings
+CORS(app, resources={r"/*": {
+    "origins": ["http://localhost:5173", "http://127.0.0.1:5173", "https://queens-schedule-analyzer.netlify.app"],
+    "methods": ["GET", "POST", "OPTIONS"],
+    "allow_headers": ["Content-Type", "Authorization"]
+}})
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
