@@ -1,6 +1,6 @@
 # 🧠 Schedule Verifier
 <img src="https://media1.giphy.com/media/ieJdVmYjqq6SA09qgb/giphy_s.gif" width="400">  
-<img src="https://i.ibb.co/3Y1m7CJm/image.png" width="400">
+
 
 ---
 
