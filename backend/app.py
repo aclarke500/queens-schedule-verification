@@ -15,7 +15,11 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from ocr import extract_text_from_image
 from agent import get_courses_from_ocr
+from services.chatbot import ask_chatbot
 from analyze_courses import check_cs_courses
+from dotenv import load_dotenv
+load_dotenv()
+
 
 
 app = Flask(__name__)
@@ -25,6 +29,39 @@ CORS(app, resources={r"/*": {
     "methods": ["GET", "POST", "OPTIONS"],
     "allow_headers": ["Content-Type", "Authorization"]
 }})
+
+
+@app.route('/api/chatbot', methods=['POST'])
+def chat():
+    """
+    Endpoint for the chatbot. Returns chatbot's response.
+    
+    Expects:
+        - A message with the users most recent message key 'message' (required)
+        - Chat history as an array of {role:'asisstant'|'user', content:str} (optional)
+        
+    Returns:
+        - JSON object with LLMs response as a llm_response property.
+    """
+    try:
+        user_message = request.json.get('message')
+        history = request.json.get('history')
+        
+        if not user_message:
+            return jsonify({"error": "Message is required"}), 400
+        
+        message_form = {"role":"user", "content":user_message}
+        history.append(message_form)
+        
+        response = ask_chatbot(history)
+        return jsonify({
+            'llm_response':response
+        })
+ 
+    except Exception as e:
+        print('ERROR:', str(e))
+        return jsonify({"error":str(e)}), 500
+    
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
