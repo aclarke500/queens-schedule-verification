@@ -29,12 +29,12 @@ requests==2.32.3
 python-dateutil==2.9.0.post0
 
 # Supabase
-# supabase==2.3.5
+supabase==2.3.5
 
 # NumPy
 numpy==1.26.4
 
-supabase==1.0.3
+# supabase==1.0.3
 gotrue==2.5.3
 httpx==0.23.3  # ✅ last known compatible version
 
