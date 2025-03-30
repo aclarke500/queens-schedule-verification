@@ -32,6 +32,10 @@ instance/
 # Flask / Werkzeug log files
 backend/*.log
 
+backend/chunking/*
+
+data/*
+
 # === OS/System Files ===
 .DS_Store
 Thumbs.db
