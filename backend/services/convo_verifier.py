@@ -25,8 +25,6 @@ convo_verifier_chain = convo_verifier_prompt | convo_verifier_llm | convo_verifi
 
 # Usage function
 def is_convo_good_faith(user_messages: list[str]) -> bool:
-    # Create history string without leading comma
-    history = ' '.join(msg["content"] for msg in user_messages)
-    
-    result = convo_verifier_chain.invoke({"history": history})
+    msg = user_messages[-1]
+    result = convo_verifier_chain.invoke({"history": msg})
     return result["is_good_faith"].lower() == "true"
