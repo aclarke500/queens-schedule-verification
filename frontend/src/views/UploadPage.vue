@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { store } from '../store';
+import ChatWindow from '../components/ChatWindow.vue';
 
 const router = useRouter();
 
@@ -23,6 +24,10 @@ const analyzeSchedules = async () => {
 
 <template>
   <div class="upload-section">
+    <div class="chat-section">
+      <h2 class="section-title">Need Help?</h2>
+      <ChatWindow />
+    </div>
     <div class="semester-uploads">
       <div class="semester-container">
         <h2 class="semester-title">Fall Semester</h2>

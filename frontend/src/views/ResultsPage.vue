@@ -2,6 +2,7 @@
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { store } from '../store';
+import ChatWindow from '../components/ChatWindow.vue';
 
 const router = useRouter();
 
@@ -31,7 +32,7 @@ const goBack = () => {
           </li>
         </ul>
       </div>
-
+      <ChatWindow/>
       <div class="courses-container">
         <h3 class="section-title">Your Courses</h3>
         <div class="course-list">

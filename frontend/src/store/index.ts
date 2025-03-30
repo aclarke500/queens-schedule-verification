@@ -11,6 +11,14 @@ interface Course {
 export const store = reactive({
   courses: [],
   issues: [],
+  apiUrl:()=>{
+    const isProd = import.meta.env.VITE_DEV == 'false';
+    if(isProd){
+      return  import.meta.env.VITE_PROD_URL
+    } else {
+      return import.meta.env.VITE_DEV_URL
+    }
+  },
   
   // Schedule analyzer state
   fallSchedule: null as File | null,
