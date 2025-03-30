@@ -28,5 +28,12 @@ langchain-core==0.3.49
 requests==2.32.3
 python-dateutil==2.9.0.post0
 
+# Supabase
+supabase==2.3.5
+
+# NumPy
+numpy==1.26.4
+
+
 # gunicorn
 gunicorn==21.2.0
