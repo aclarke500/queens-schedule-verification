@@ -35,7 +35,7 @@ supabase==2.15.0
 numpy==1.26.4
 
 # supabase==1.0.3
-gotrue==2.5.3
+gotrue==2.12.0
 httpx==0.28.1
 
 
