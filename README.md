@@ -6,7 +6,7 @@
 
 ## Overview
 
-This application allows first-year students at Queen’s University to upload images of their class schedules and receive a structured analysis in return. It leverages cutting-edge machine learning and natural language processing technologies to convert unstructured images into verified, structured data.
+This is meant to be a onestop shop for CS students at Queen's navigating course selection. I'm building an informed, context dependent chatbot that answers any of their questions relating to course selection (and trolls them if they get off topic). Frosh can also upload a photo of their schedule, and I will analyze it to see if there are any mistakes or missing courses in it.
 
 ## Try It Out! 🚀
 
@@ -17,9 +17,11 @@ Check out the live application at [https://queens-schedule-analyzer.netlify.app]
 
 ## Features
 
-- Upload one or more images of a class schedule
+- Interactive and context aware **Chatbot** built using **LangChain** and **OpenAI**
+- Context aware **RAG** to help answer questions
+- **Supabase Vector DB** for querying thr RAG
 - Google Cloud **Document AI** extracts text using OCR
-- **LangChain** and **OpenAI** analyze and structure course information
+- Uses LLMs to clean up and error correct OCR text
 - Validates schedules and verifies computing course requirements
 - Fast, responsive frontend built with **Vue.js**
 - **Flask** backend orchestrates the pipeline and serves as the API layer
@@ -32,6 +34,7 @@ Check out the live application at [https://queens-schedule-analyzer.netlify.app]
 ### Backend
 - **Python**
 - **Flask** – lightweight REST API
+- **Supabase** - lightweight (free) cloud vector database
 - **Google Cloud Document AI** – powerful OCR for schedule images
 - **OpenAI GPT-4o** – understands and structures unstructured text
 - **LangChain** – prompt orchestration and output parsing
