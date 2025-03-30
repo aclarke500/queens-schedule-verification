@@ -44,14 +44,11 @@ def chat():
         - JSON object with LLMs response as a llm_response property.
     """
     try:
-        user_message = request.json.get('message')
+        # user_message = request.json.get('message')
         history = request.json.get('history')
-        
-        if not user_message:
-            return jsonify({"error": "Message is required"}), 400
-        
-        message_form = {"role":"user", "content":user_message}
-        history.append(message_form)
+        if not history:
+            return jsonify({"error": "History is required"}), 400
+      
         
         response = ask_chatbot(history)
         return jsonify({
