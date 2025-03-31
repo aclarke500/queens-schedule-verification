@@ -4,48 +4,46 @@
 
 ---
 
-## Overview
+## 🧠 Overview
 
-This is meant to be a onestop shop for CS students at Queen's navigating course selection. I'm building an informed, context dependent chatbot that answers any of their questions relating to course selection (and trolls them if they get off topic). Frosh can also upload a photo of their schedule, and I will analyze it to see if there are any mistakes or missing courses in it.
+This project is your AI-powered co-pilot for navigating Queen’s CS course planning. It combines OCR, LLM reasoning, and a custom RAG pipeline to help students—especially frosh—verify their schedules, understand program requirements, and get answers to major-specific academic questions. Off-topic? The chatbot has a personality and will *gently* troll you back.
 
-## Try It Out! 🚀
+## 🚀 Try It Out
 
-Check out the live application at [https://queens-schedule-analyzer.netlify.app](https://queens-schedule-analyzer.netlify.app/)
-
-
----
-
-## Features
-
-- Interactive and context aware **Chatbot** built using **LangChain** and **OpenAI**
-- Context aware **RAG** to help answer questions
-- **Supabase Vector DB** for querying thr RAG
-- Google Cloud **Document AI** extracts text using OCR
-- Uses LLMs to clean up and error correct OCR text
-- Validates schedules and verifies computing course requirements
-- Fast, responsive frontend built with **Vue.js**
-- **Flask** backend orchestrates the pipeline and serves as the API layer
-- **Auto-deployed on Render** with CI/CD for seamless updates
+👉 [https://queens-schedule-analyzer.netlify.app](https://queens-schedule-analyzer.netlify.app/)
 
 ---
 
-## Technologies Used
+## 🔍 Features
 
-### Backend
-- **Python**
-- **Flask** – lightweight REST API
-- **Supabase** - lightweight (free) cloud vector database
-- **Google Cloud Document AI** – powerful OCR for schedule images
-- **OpenAI GPT-4o** – understands and structures unstructured text
-- **LangChain** – prompt orchestration and output parsing
+- **Chatbot with Memory** – Built with **LangChain** + **OpenAI** for contextual multi-turn conversations
+- **RAG System** – Intelligent, filtered search over parsed academic policies
+- **Supabase Vector DB** – Custom cosine similarity search with major/option/specialization filters via `rpc()` functions
+- **Dynamic Filter Engine** – LLM interprets user queries to apply RAG filters in real time
+- **Document AI (GCP)** – OCR with Google’s Document AI for schedule parsing
+- **LLM-powered Correction** – Cleans and error-corrects OCR output before validation
+- **Schedule Validator** – Detects missing or incorrect courses for each major and option
+- **Vue.js Frontend** – Responsive interface for chat and file upload
+- **Flask API** – Manages embeddings, Supabase queries, and model calls
+- **Auto-deployment on Render** – CI/CD integrated for fast iteration
 
-### Frontend
-- **Vue.js** – reactive single-page application for a smooth user experience
-- **Vite** – lightning-fast development and production builds
+## 🛠️ Technologies Used
 
-### DevOps
-- **Render** – automatic deployments from GitHub with environment variable support
-- **Environment-based secrets** – secure management of API keys and credentials
+### 🧩 Backend
+- **Python** – primary backend language
+- **Flask** – lightweight API server for chatbot, RAG, and OCR pipelines
+- **Supabase** – free Postgres vector DB with custom RPC for similarity + filtering
+- **Google Cloud Document AI** – OCR engine for extracting course text from images
+- **OpenAI GPT-4o / DeepSeek** – used for reasoning, chunking, and parsing academic data
+- **LangChain** – for output schema enforcement, prompt pipelines, and LLM chaining
+
+### 🎨 Frontend
+- **Vue.js** – dynamic SPA for chat, upload, and user interaction
+- **Vite** – ultra-fast bundler for dev & production
+
+### ⚙️ DevOps
+- **Render** – free-tier hosting with GitHub CI/CD integration
+- **.env-based secrets** – secure management of OpenAI, Supabase, and GCP keys
 
 ---
 
