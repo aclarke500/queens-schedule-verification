@@ -45,11 +45,11 @@ Thumbs.db
 .idea/
 *.swp
 
+chunking/
 
-echo "# queens-schedule-verification" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M master
-git remote add origin https://github.com/aclarke500/queens-schedule-verification.git
-git push -u origin master
+chunking/cleaned_text
+chunking/raw_text*
+chunking/.env
+chunking/data
+
+*.env
