@@ -29,7 +29,7 @@ def ask_chatbot(user_messages):
 
     # Step 2: Prepare context
     last_user_message = user_messages[-1]["content"]
-    context = get_n_chunks(last_user_message)
+    context = get_n_chunks(last_user_message, user_messages)
    
     messages = []
     # Inject RAG-based system message
