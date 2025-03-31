@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, watch, nextTick } from 'vue'
 import { askChatbot } from '../api/chatbot'
 import { Message } from '../types'
 
@@ -14,6 +14,26 @@ const state = reactive<ChatState>({
   newMessage: '',
   isLoading: false
 })
+
+// Add a function to scroll to bottom
+const scrollToBottom = () => {
+  const chatMessages = document.querySelector('.chat-messages')
+  if (chatMessages) {
+    chatMessages.scrollTop = chatMessages.scrollHeight
+  }
+}
+
+// Watch for changes in messages and loading state
+watch(
+  () => [...state.messages, state.isLoading],
+  () => {
+    // Use nextTick to ensure DOM is updated before scrolling
+    nextTick(() => {
+      scrollToBottom()
+    })
+  },
+  { deep: true }
+)
 
 const sendMessage = async () => {
   if (!state.newMessage.trim()) return
@@ -91,7 +111,7 @@ const sendMessage = async () => {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  height: 500px;
+  height: 400px;
   overflow: hidden;
 }
 

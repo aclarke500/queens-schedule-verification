@@ -8,28 +8,44 @@
       <div class="header">
         <img src="https://media1.giphy.com/media/ieJdVmYjqq6SA09qgb/giphy_s.gif" alt="Queen's Bear" class="logo">
         <h1 class="title">
-          Queen's Schedule Analyzer
+          Queen's AI Course Advisor
         </h1>
         <img src="https://i.ibb.co/3Y1m7CJm/boohoo-removebg-preview.png" alt="boohoo the bear" class="logo">
       </div>
 
-      <!-- Router view will display either UploadPage or ResultsPage -->
-      <router-view />
+      <nav class="navigation">
+        <router-link 
+          to="/upload" 
+          class="nav-link"
+          active-class="active"
+        >
+          Schedule Checker
+        </router-link>
+        <router-link 
+          to="/chat"
+          class="nav-link"
+          active-class="active"
+        >
+          Course Chatbot
+        </router-link>
+      </nav>
+    
     </div>
+
+    <router-view />
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 // Variables - Enhanced color palette
-$queens-yellow: #ffcb05; // Brighter yellow
-$queens-blue: #0375b4; // More vibrant blue
-$queens-red: #e61c2b; // More vibrant red
-$dark-bg-1: #1a1f36; // Richer dark blue
-$dark-bg-2: #252d47; // Improved midtone
-$dark-bg-3: #343c5a; // Lighter card background
+$queens-yellow: #ffcb05;
+$queens-blue: #0375b4;
+$queens-red: #e61c2b;
+$dark-bg-1: #1a1f36;
+$dark-bg-2: #252d47;
+$dark-bg-3: #343c5a;
 $text-light: #ffffff;
-$text-light-muted: #b0c0d6; // More bluish light gray
-$accent-purple: #6b56c6; // Additional accent color
+$text-light-muted: #b0c0d6;
 $card-gradient-start: rgba(23, 28, 56, 0.7);
 $card-gradient-end: rgba(32, 40, 68, 0.9);
 
@@ -42,7 +58,7 @@ $card-gradient-end: rgba(32, 40, 68, 0.9);
   color: $text-light;
 
   @media (min-width: 768px) {
-    padding: 2rem;
+    padding: 1.5rem;
   }
 }
 
@@ -57,7 +73,6 @@ $card-gradient-end: rgba(32, 40, 68, 0.9);
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-  margin-bottom: 3rem;
 }
 
 .logo {
@@ -378,6 +393,55 @@ $card-gradient-end: rgba(32, 40, 68, 0.9);
     transform: translateY(-3px);
     background-color: rgba($queens-red, 0.12);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+}
+
+// Replace the existing .navigation styles with these
+.navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1rem 0;
+  
+  .nav-link {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $text-light-muted;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    
+    &:hover {
+      color: $queens-yellow;
+    }
+    
+    &.active {
+      color: $queens-yellow;
+      background: rgba($queens-blue, 0.1);
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -0.25rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 2px;
+        background-color: $queens-yellow;
+        border-radius: 2px;
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    gap: 0.75rem;
+    
+    .nav-link {
+      font-size: 1rem;
+      padding: 0.4rem 0.75rem;
+    }
   }
 }
 </style>
