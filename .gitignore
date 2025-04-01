@@ -45,7 +45,7 @@ Thumbs.db
 .idea/
 *.swp
 
-chunking/
+
 
 chunking/cleaned_text
 chunking/raw_text*
