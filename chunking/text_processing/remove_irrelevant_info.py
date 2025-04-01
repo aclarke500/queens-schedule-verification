@@ -13,7 +13,7 @@ client = OpenAI(
 
 prompt = (
     "You are a content filter for a university schedule advisor. The user will provide scraped website text. "
-    "Remove any content not related to academic rules, enrollment requirements, course prerequisites, or graduation policies. "
+    "Remove any content not related to academic rules, enrollment requirements, courses, course prerequisites, or graduation policies. Include the course title."
     "Only keep relevant academic content. Do NOT summarize. Return the text exactly as written. If no text is relevant return an empty string."
 )
 
@@ -54,15 +54,17 @@ def clean_text(input_path, output_path, prompt):
 raw_text_dir = 'raw_text_from_websites'
 output_dir = 'cleaned_text'
 
-# Create output directory if it doesn't exist
-os.makedirs(output_dir, exist_ok=True)
 
-# Process each file in raw_text directory
-for filename in os.listdir(raw_text_dir):
-    if filename.endswith('.txt'):
-        input_path = os.path.join(raw_text_dir, filename)
-        output_path = os.path.join(output_dir, filename)
-        print(f"\n📄 Processing {filename}...")
-        clean_text(input_path, output_path, prompt)
-            
+def clean_raw_text(input_dir, output_dir):
+# Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Process each file in raw_text directory
+    for filename in os.listdir(raw_text_dir):
+        if filename.endswith('.txt'):
+            input_path = os.path.join(raw_text_dir, filename)
+            output_path = os.path.join(output_dir, filename)
+            print(f"\n📄 Processing {filename}...")
+            clean_text(input_path, output_path, prompt)
+                
 

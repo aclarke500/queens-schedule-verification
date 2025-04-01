@@ -1,6 +1,6 @@
 import asyncio
 from playwright.async_api import async_playwright
-from websites import websites
+# from websites import websites
 
 async def extract_text_from_url(url):
     async with async_playwright() as p:
@@ -28,11 +28,26 @@ async def extract_text_from_url(url):
         return text
 
 
-for website in websites:
-    url = website["url"]
-    name = website["name"]
-    text = asyncio.run(extract_text_from_url(url))
-    path = f"../raw_text_from_websites/{name}.txt"
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(text)
-    # print(text)
+
+def write_text_to_directory(websites, output_dir):
+    """Writes scraped text content from websites to files in the specified directory.
+
+    Args:
+        websites: List of dictionaries containing website information. Each dictionary
+            should have 'url' and 'name' keys.
+        output_dir: String path to the directory where text files will be written.
+
+    Returns:
+        None
+
+    Raises:
+        IOError: If there are issues writing to the output directory.
+    """
+    for website in websites:
+        url = website["url"]
+        name = website["name"]
+        text = asyncio.run(extract_text_from_url(url))
+        path = output_dir+f"/{name}.txt"
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(text)
+        # print(text)
