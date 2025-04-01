@@ -14,7 +14,7 @@ const state = reactive<ChatState>({
   newMessage: '',
   isLoading: false
 })
-
+//
 const exampleQuestions = [
   "What are the prerequisites for CISC 324?",
   "What courses should I take in first year?",
