@@ -69,7 +69,6 @@ export const store = reactive({
         endpoint = import.meta.env.VITE_DEV_URL
       }
       endpoint+='/api/upload';
-      alert(endpoint)
     
       const response = await fetch(endpoint, {
         method: 'POST',
