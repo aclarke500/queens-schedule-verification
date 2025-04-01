@@ -13,10 +13,10 @@ if encoded_creds:
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from ocr import extract_text_from_image
-from agent import get_courses_from_ocr
+from services.ocr import extract_text_from_image
+from services.ocr_correction import get_courses_from_ocr
 from services.chatbot import ask_chatbot
-from analyze_courses import check_cs_courses
+from services.analyze_courses import check_cs_courses
 from dotenv import load_dotenv
 load_dotenv()
 

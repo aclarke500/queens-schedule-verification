@@ -2,6 +2,7 @@ import openai
 from supabase import create_client
 import numpy as np
 from services.RAG_filters import get_filters_for_RAG
+from services.get_courses import get_course_context
 
 from dotenv import load_dotenv
 import os
@@ -22,6 +23,8 @@ def embed_query(query:str)->np.array:
 
 def get_n_chunks(message, messages, n=5):
     filters=get_filters_for_RAG(messages)
+    
+    course_info = get_course_context(messages)
     
     vector = embed_query(message)
 
@@ -54,6 +57,7 @@ def get_n_chunks(message, messages, n=5):
         unique_chunks[chunk['content']] = chunk
     
     context = "\n\n".join([chunk['content'] for chunk in unique_chunks.values()])
+    context += course_info
 
     return context
 # need one functio to embded users query str -> vector
