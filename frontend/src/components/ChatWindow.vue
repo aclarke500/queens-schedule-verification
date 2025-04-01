@@ -15,6 +15,18 @@ const state = reactive<ChatState>({
   isLoading: false
 })
 
+const exampleQuestions = [
+  "What are the prerequisites for CISC 324?",
+  "What courses should I take in first year?",
+  "Can you explain the Computing Core requirements?",
+  "What electives are recommended for the AI option?"
+]
+
+const askExample = (question: string) => {
+  state.newMessage = question
+  sendMessage()
+}
+
 // Add a function to scroll to bottom
 const scrollToBottom = () => {
   const chatMessages = document.querySelector('.chat-messages')
@@ -70,6 +82,22 @@ const sendMessage = async () => {
     </div>
     
     <div class="chat-messages">
+      <!-- Example questions -->
+      <div v-if="state.messages.length === 0" class="example-questions">
+        <p class="example-hint">Try asking:</p>
+        <div class="question-chips">
+          <button 
+            v-for="question in exampleQuestions" 
+            :key="question"
+            @click="askExample(question)"
+            class="question-chip"
+          >
+            {{ question }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Existing messages -->
       <div v-for="(message, index) in state.messages" 
            :key="index" 
            :class="['message', message.isUser ? 'user-message' : 'bot-message']">
@@ -246,6 +274,43 @@ const sendMessage = async () => {
       opacity: 0.6;
       cursor: not-allowed;
     }
+  }
+}
+
+.example-questions {
+  padding: 1rem;
+  
+  .example-hint {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+}
+
+.question-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.question-chip {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  color: #ffcb05;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: fit-content;
+  text-align: left;
+  
+  &:hover {
+    background: rgba(3, 117, 180, 0.2);
+    border-color: rgba(3, 117, 180, 0.3);
+    transform: translateY(-1px);
   }
 }
 </style>
