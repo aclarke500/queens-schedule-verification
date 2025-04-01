@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { store } from '../store';
-import ChatWindow from '../components/ChatWindow.vue';
 
 const router = useRouter();
 
