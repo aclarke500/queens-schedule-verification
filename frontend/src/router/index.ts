@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import UploadPage from '../views/UploadPage.vue'
 import ResultsPage from '../views/ResultsPage.vue'
 import ChatPage from '../views/ChatPage.vue'
