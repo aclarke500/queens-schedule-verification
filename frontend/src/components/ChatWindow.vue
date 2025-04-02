@@ -18,8 +18,8 @@ const state = reactive<ChatState>({
 const exampleQuestions = [
   "What are the prerequisites for CISC 324?",
   "What courses should I take in first year?",
-  "Can you explain the Computing Core requirements?",
-  "What electives are recommended for the AI option?"
+  "Should I take CISC 101 or CISC 121?",
+  "What electives could I take to complete the AI option?"
 ]
 
 const askExample = (question: string) => {
