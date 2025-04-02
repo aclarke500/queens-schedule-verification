@@ -16,16 +16,17 @@ This project is your AI-powered co-pilot for navigating Queen’s CS course plan
 
 ## 🔍 Features
 
-- **Chatbot with Memory** – Built with **LangChain** + **OpenAI** for contextual multi-turn conversations
-- **RAG System** – Intelligent, filtered search over parsed academic policies
-- **Supabase Vector DB** – Custom cosine similarity search with major/option/specialization filters via `rpc()` functions
-- **Dynamic Filter Engine** – LLM interprets user queries to apply RAG filters in real time
-- **Document AI (GCP)** – OCR with Google’s Document AI for schedule parsing
-- **LLM-powered Correction** – Cleans and error-corrects OCR output before validation
-- **Schedule Validator** – Detects missing or incorrect courses for each major and option
-- **Vue.js Frontend** – Responsive interface for chat and file upload
-- **Flask API** – Manages embeddings, Supabase queries, and model calls
-- **Auto-deployment on Render** – CI/CD integrated for fast iteration
+- **Agentic Chatbot** – Built with **LangChain**, **OpenAI GPT-4o**, and **DeepSeek**, enabling contextual multi-turn conversations with memory and reasoning
+- **Agentic Context Retrieval** – Uses LLMs to dynamically decide what types of context (RAG, structured data, course plans) to retrieve per message
+- **Supabase Vector DB** – Custom **cosine similarity** search via `rpc()` function
+- **LLM-Orchestrated Data Access** – Course plans, options, and program data queried only when relevant, using structured planning LLMs
+- **Document AI Integration (GCP)** – Extracts text from student schedules via OCR
+- **LLM-Powered Correction Pipeline** – Fixes formatting and semantic errors in OCR output before validation
+- **Schedule Validator** – Automatically flags missing or invalid courses for a student’s specific major and year
+- **Vue.js Frontend** – Responsive chat interface with file uploads and real-time feedback
+- **Flask Backend** – Handles embeddings, Supabase access, and LLM orchestration logic
+- **CI/CD via Render** – Auto-deployments with environment-based secrets for fast iteration and testing
+
 
 ## 🛠️ Technologies Used
 
@@ -43,6 +44,7 @@ This project is your AI-powered co-pilot for navigating Queen’s CS course plan
 
 ### ⚙️ DevOps
 - **Render** – free-tier hosting with GitHub CI/CD integration
+- **Netlify** - free-tier hosting with GitHub CI/CD integration
 - **.env-based secrets** – secure management of OpenAI, Supabase, and GCP keys
 
 ---
@@ -56,20 +58,49 @@ This project is your AI-powered co-pilot for navigating Queen’s CS course plan
 - Google Cloud Service Account JSON key
 - OpenAI API key
 
-### Backend
+## 🛠️ Backend Setup
 
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+To run the backend locally:
 
-# Set environment variable for Google credentials (local)
-export GOOGLE_APPLICATION_CREDENTIALS="path/to/key.json"
+1. **Clone the repo** and navigate to the backend directory:
 
-# Or use .env and python-dotenv if applicable
-python app.py
-```
+    ```bash
+    cd backend
+    pip install -r requirements.txt
+    ```
+
+2. **Create .env file** with your api keys:
+    ```bash
+    open_ai_key=your_openai_key
+    gcp_project_id=your_gcp_project_id
+    gcp_location=your_gcp_location
+    gcp_processor_id=your_gcp_document_ai_processor_id
+    db_pass=your_database_password
+    supabase_url=https://your-project.supabase.co
+    supabase_service=your_supabase_service_role_key
+    deepseek_key=your_deepseek_api_key
+    ```
+
+3. **Setup Python in a virtual environment:**
+    ```bash 
+    python -m venv venv
+    source venv/Scripts/activate  # On Windows
+    pip install -r requirements.txt
+    ```
+
+4. **Run Flask API:**
+    ```bash
+    python app.yp
+    ```
+
+Make sure your Supabase project is set up with the expected schema and RPC functions. Frontend will connect automatically using the configured endpoints.
+
+## Database Schema
+
+![Database Schema](./db_schema.png)
+
+
+
 
 
 ### Frontend
@@ -78,6 +109,15 @@ python app.py
 cd frontend
 npm install
 npm run dev
+```
+
+## Frontend Environment Variables
+Add a .env with these variables inside your frontend directory
+```bash
+VITE_DEV=true
+VITE_DEV_URL=http://127.0.0.1:5000
+VITE_API_URL=http://localhost:5000
+VITE_PROD_URL=https://your_deployment_url.ca
 ```
 
 ---
