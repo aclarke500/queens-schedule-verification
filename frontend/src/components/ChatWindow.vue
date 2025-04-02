@@ -7,12 +7,14 @@ interface ChatState {
   messages: Message[]
   newMessage: string
   isLoading: boolean
+  displayedText: string
 }
 
 const state = reactive<ChatState>({
   messages: [],
   newMessage: '',
-  isLoading: false
+  isLoading: false,
+  displayedText: ''
 })
 //
 const exampleQuestions = [
@@ -26,6 +28,7 @@ const askExample = (question: string) => {
   state.newMessage = question
   sendMessage()
 }
+
 
 // Add a function to scroll to bottom
 const scrollToBottom = () => {
@@ -61,15 +64,29 @@ const sendMessage = async () => {
   state.isLoading = true
   const newMessage = await askChatbot(state.messages)
   
-  // Simulate bot response with 2 second delay
-
-    state.messages.push({
-      text: newMessage,
-      isUser: false,
-      timestamp: new Date()
-    })
-    state.isLoading = false
-
+  // Add bot message with empty displayed text
+  state.messages.push({
+    text: newMessage,
+    isUser: false,
+    timestamp: new Date()
+  })
+  state.isLoading = false
+  
+  // Animate the text
+  state.displayedText = ''
+  const text = newMessage
+  const words = text.split(' ')
+  let currentIndex = 0
+  
+  const animateText = () => {
+    if (currentIndex < words.length) {
+      state.displayedText += (currentIndex > 0 ? ' ' : '') + words[currentIndex]
+      currentIndex++
+      setTimeout(animateText, 50) // delay of 50ms
+    }
+  }
+  
+  animateText()
   
   state.newMessage = ''
 }
@@ -102,7 +119,7 @@ const sendMessage = async () => {
            :key="index" 
            :class="['message', message.isUser ? 'user-message' : 'bot-message']">
         <div class="message-content">
-          {{ message.text }}
+          {{ message.isUser ? message.text : (index === state.messages.length - 1 ? state.displayedText : message.text) }}
         </div>
         <div class="message-time">
           {{ message.timestamp.toLocaleTimeString() }}
