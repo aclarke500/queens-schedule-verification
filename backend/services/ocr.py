@@ -2,11 +2,9 @@ from google.cloud import documentai_v1 as documentai
 import os
 from dotenv import load_dotenv
 from typing import Union, BinaryIO, Any
-import io
 
 
 load_dotenv()
-
 project_id = os.getenv("gcp_project_id")
 location = os.getenv("gcp_location")
 processor_id = os.getenv("gcp_processor_id")    

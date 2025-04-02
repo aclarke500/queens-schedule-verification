@@ -1,26 +1,31 @@
 import openai
-import json
-import time
-from tqdm import tqdm
 
-with open("chunks.json", "r", encoding="utf-8") as f:
-    chunks = json.load(f)
+import os
+from dotenv import load_dotenv
 
-embedded_chunks = []
+# Load environment variables
+load_dotenv()
 
-for chunk in tqdm(chunks, desc="Embedding chunks"):
+# Initialize OpenAI client
+openai.api_key = os.getenv("open_ai_key")
+
+
+def get_embedding(text: str) -> list[float]:
+    """
+    Get OpenAI embedding for a text string.
+    
+    Args:
+        text: String to embed
+        
+    Returns:
+        List of floats representing the embedding vector
+    """
     try:
-        content = chunk["content"]
         response = openai.embeddings.create(
-            model="text-embedding-3-small",  # 👈 switch to -3-large if needed
-            input=content
+            model="text-embedding-3-small",
+            input=text
         )
-        embedding = response.data[0].embedding
-        chunk["embedding"] = embedding
-        embedded_chunks.append(chunk)
-        time.sleep(0.5)  # Optional: be nice to the rate limiter
+        return response.data[0].embedding
     except Exception as e:
-        print("Error embedding chunk:", e)
-
-with open("chunk_embeddings.json", "w", encoding="utf-8") as f:
-    json.dump(embedded_chunks, f, indent=2)
+        print(f"Error getting embedding: {e}")
+        return []

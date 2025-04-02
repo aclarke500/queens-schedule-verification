@@ -1,8 +1,3 @@
-# {'course_code': 'STAT 362', 'day': 'Friday', 'time_start': '11:30AM', 'time_end': '12:30PM', 'location': 'Biosciences Complex 1102'}
-# is it on west?
-
-# is it back to back west and non west?
-
 # required courses are CISC 102, CISC 121, CISC 124, CISC 101
 # MATH courses are MATH 110 or MATH 112 or MATH 111 for lin alg
 # CALC are MATH 120, 121, or 123+124

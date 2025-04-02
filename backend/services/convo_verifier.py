@@ -23,8 +23,19 @@ Always respond ONLY with the JSON output."""),
 # Pipe together
 convo_verifier_chain = convo_verifier_prompt | convo_verifier_llm | convo_verifier_parser
 
-# Usage function
 def is_convo_good_faith(user_messages: list[str]) -> bool:
+    """Determines if a conversation is being conducted in good faith.
+
+    This function analyzes the latest message in a conversation history to determine if
+    the user is engaging with the academic advisor chatbot appropriately and respectfully.
+
+    Args:
+        user_messages: A list of strings containing the conversation history messages.
+
+    Returns:
+        bool: True if the conversation is in good faith, False if the user appears to be
+            trolling or asking inappropriate questions.
+    """
     msg = user_messages[-1]
     result = convo_verifier_chain.invoke({"history": msg})
     return result["is_good_faith"].lower() == "true"

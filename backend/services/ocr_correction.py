@@ -157,8 +157,3 @@ def get_courses_from_ocr(ocr_text: str) -> list:
     for course in course_dicts:
         course["course_code"] = course["course_code"][:8]
     return course_dicts
-
-
-
-text = "Schedule\nTi\n8.00AM\n9:00AM\n10:00AM\n11:00AM\n12:00PM\n1:00PM\n2:00PM\n3:00PM\n4:00PM\n5:00PM\nMonday\nMar 24\nCISC 474-001\nLecture\n10:30AM-\n11:30AM\nDunning Hall 11\nCISC 455-001\nLecture\n12:30PM -\n1:30PM\nKingston Hall\n101\nSTAT 362-001\nLecture\n1:30PM.\n2:30PM\nBiosciences\nComplex 1102\nMar 25\nCISC 332-001\nLecture\n8:30AM -\n9:30AM\nBiosciences\nComplex 1101\nWednesday\nCISC 474-001\nLecture\n9:30AM-\n10:30AM\nDunning Hall 11\nCISC 332-001\nLecture\n10:30AM-\n11:30AM\nBiosciences\nComplex 1101\nCISC 455-001\nLecture\n11:30AM-\n12:30PM\nKingston Hall\n101\nSTAT 362-001\nLecture\n12:30PM -\n1:30PM\nBiosciences\nComplex 1102\nThursday\nMar 27\nCISC 497-001\nLecture\n1:00PM.\n2:30PM\nJeffery Hall 126\nCISC 497-001\nLecture\n1:00PM-\n2:30PM\nJeffery Hall 126\nCISC 456-001\nLecture\n1:30PM.\n2:30PM\nKingston Hall\n101\nCISC 407-004\nSeminar\n4:00PM-\n5:30PM\nEllis Hall 333\nFriday\nMar 29\nCISC 474-001\nLecture\n8:30AM -\n9:30AM\nDunning Hall 11\nCISC 332-001\nLecture\n9:30AM-\n10:30AM\nBiosciences\nComplex 1101\nSTAT 362-001\nLecture\n11:30AM-\n12:30PM\nBiosciences\nComplex 1102\nSaturday\nMar 29\nSunday\nMar 30\n"
-r = get_courses_from_ocr(text)
