@@ -21,7 +21,7 @@ export async function askChatbot(messages:Message[]){
     const history = convertMessagesToChatPrompt(messages)
     const apiUrl = store.apiUrl();
     const fullEndpoint: string = apiUrl +'/api/chatbot';
-    // debugger
+
     const response = await fetch(fullEndpoint, {
         method:'POST',
         headers:{
@@ -35,7 +35,7 @@ export async function askChatbot(messages:Message[]){
     }
 
     const data = await response.json();
-    console.log(data)
+
     const llmMessage = data?.llm_response;
     return llmMessage;
 }
